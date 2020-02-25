@@ -1,7 +1,7 @@
 import { GetState, Dispatch } from '../reducers/types';
 
-const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
-const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
+export const INCREMENT_COUNTER = 'INCREMENT_COUNTER';
+export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
 // export function increment() {
 //   return {
@@ -9,7 +9,7 @@ const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 //   };
 // }
 
-const increment = () => ({
+export const increment = () => ({
   type: INCREMENT_COUNTER
 });
 
@@ -19,7 +19,7 @@ const increment = () => ({
 //   };
 // }
 
-const decrement = () => ({
+export const decrement = () => ({
   type: DECREMENT_COUNTER
 });
 
@@ -35,8 +35,8 @@ const decrement = () => ({
 //   };
 // }
 
-const incrementIfOdd = () => (dispatch: Dispatch, state: GetState) => {
-  const { counter } = state();
+export const incrementIfOdd = () => (dispatch: Dispatch, state: GetState) => {
+  export const { counter } = state();
   if (counter % 2 === 0) return;
 
   dispatch(increment());
@@ -50,17 +50,8 @@ const incrementIfOdd = () => (dispatch: Dispatch, state: GetState) => {
 //   };
 // }
 
-const incrementAsync = (delay = 1000) => (dispatch: Dispatch) => {
+export const incrementAsync = (delay = 1000) => (dispatch: Dispatch) => {
   setTimeout(() => {
     dispatch(increment());
   }, delay);
-};
-
-export {
-  INCREMENT_COUNTER,
-  DECREMENT_COUNTER,
-  increment,
-  decrement,
-  incrementIfOdd,
-  incrementAsync
 };
