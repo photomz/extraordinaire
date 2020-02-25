@@ -35,7 +35,7 @@ export default merge.smart(baseConfig, {
     rules: [
       // Extract all .global.css to style.css as is
       {
-        test: /\.global\.css$/,
+        test: /global\.css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,

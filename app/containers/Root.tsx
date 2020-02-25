@@ -5,9 +5,6 @@ import { hot } from 'react-hot-loader/root';
 import { History } from 'history';
 import { Store } from '../reducers/types';
 import Routes from '../Routes';
-import '../styles/reset.css';
-import '../styles/fonts.css';
-import '../styles/global.css';
 
 type Props = {
   store: Store;
