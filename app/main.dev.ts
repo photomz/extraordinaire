@@ -9,10 +9,12 @@
  * `./app/main.prod.js` using webpack. This gives us some performance wins.
  */
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+
+ipcMain.handle('process.platform', () => process.platform);
 
 export default class AppUpdater {
   constructor() {
@@ -57,8 +59,9 @@ const createWindow = async () => {
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
-    height: 728,
+    height: 728 + (process.platform === 'darwin' && 25),
     titleBarStyle: 'hiddenInset',
+    vibrancy: 'dark',
     webPreferences:
       process.env.NODE_ENV === 'development' || process.env.E2E_BUILD === 'true'
         ? {

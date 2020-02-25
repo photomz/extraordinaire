@@ -18,10 +18,16 @@ const StyledLink = styled(Link)`
   font-size: 1.4rem;
 `;
 
+const StyledInput = styled.input`
+  -webkit-user-select: text;
+  -webkit-app-region: none;
+`;
+
 const Home = () => (
   <Wrapper data-tid="container">
     <Subtitle>Home</Subtitle>
     <StyledLink to={routes.COUNTER}>to Counter</StyledLink>
+    <StyledInput />
   </Wrapper>
 );
 

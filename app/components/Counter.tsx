@@ -32,8 +32,8 @@ const CounterLabel = styled.div`
 
 const BackButton = styled.div`
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 0;
+  left: 16px;
 `;
 
 const ButtonWrapper = styled.div`
