@@ -8,10 +8,12 @@ import {
   incrementIfOdd,
   incrementAsync
 } from '../actions/counter';
-// import counterStateType from '../reducers/types';
+import { InitialState } from '../reducers/types';
 
 const StatefulCounter = () => {
-  const counter = useSelector(state => state.counter);
+  const counter = useSelector<InitialState, number>(
+    (state: InitialState) => state.counter
+  );
   const [
     incrementAction,
     decrementAction,

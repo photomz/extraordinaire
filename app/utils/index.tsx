@@ -96,11 +96,9 @@ const parseTimeToDayName = (item: ReactText) => {
  * @returns {[Function]|Function} Array of dispatches or 1 dispatch depending on the passed in data
  */
 const useActions = (
-  actions:
-    | ActionCreatorsMapObject<unknown>
-    | ActionCreatorsMapObject<unknown>[],
+  actions: unknown,
   deps = []
-) => {
+): ActionCreatorsMapObject<unknown> | ActionCreatorsMapObject<unknown>[] => {
   const dispatch = useDispatch();
 
   return useMemo(() => {
