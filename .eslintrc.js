@@ -30,8 +30,5 @@ module.exports = {
         config: require.resolve('./configs/webpack.config.eslint.js')
       }
     }
-  },
-  parserOptions: {
-    project: './tsconfig.json'
   }
 };
