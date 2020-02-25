@@ -1,0 +1,9 @@
+{
+  "DB": {
+    "QUERY": "db.query-Action",
+    "SEARCH": "db.search-Action"
+  },
+  "PROCESS": {
+    "PLATFORM": "process.platform-Action"
+  }
+}

@@ -7,6 +7,7 @@ import { History } from 'history';
 import { ipcRenderer } from 'electron';
 import { Store } from '../reducers/types';
 import Routes from '../Routes';
+import IPC from '../constants/ipcActions.json';
 
 const Wrapper = styled.section`
   width: 100vw;
@@ -41,7 +42,7 @@ const Root = ({ store, history }: Props) => {
   const [isMac, setIsMac] = useState(false);
   useEffect(() => {
     ipcRenderer
-      .invoke('process.platform')
+      .invoke(IPC.PROCESS.PLATFORM)
       .then(res => {
         if (res === 'darwin') setIsMac(true);
         return null;
