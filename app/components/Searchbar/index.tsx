@@ -10,38 +10,33 @@ import IPC from '../../constants/ipcActions.json';
 import InputOption from './InputOption';
 import RadioOptions from './RadioOptions';
 import Checkmark from './Checkmark';
+import Chevron from '../Chevron';
 
 const Wrapper = styled.section`
-  margin-top: ${$.layout.margin1}px;
-`;
-
-const Chevron = styled.div`
-  height: 10px;
-  width: 10px;
-`;
-
-const PillContainer = styled.div`
-  width: 200px;
-  border: 50px solid ${$.color.gray}px;
-  box-shadow: ${$.dropShadow};
+  margin-top: ${$.layout.margin2}px;
 `;
 
 const PillInput = styled.input`
   display: block;
   width: calc(100% - ${2 * $.layout.margin4}px);
-  padding: $.layout() .padding4;
+  padding: ${$.layout.padding4}px;
   margin-bottom: ${$.layout.margin4}px;
   height: 18;
   font-family: 'Aileron Semibold', sans-serif;
   border-width: 0;
-  border-radius: 10px;
+  border-radius: 999px;
   box-shadow: ${$.dropShadow.normal};
   text-align: left;
   vertical-align: middle;
   background-color: ${$.color.white};
-  font-size: ${$.font.size.header};
+  font-size: ${$.font.size.header}px;
   text-decoration: none;
   color: ${$.color.black};
+  &:focus,
+  &:hover {
+    outline: none;
+    box-shadow: ${$.dropShadow.repressed};
+  }
 `;
 
 const OptionsContainer = styled.div`
@@ -96,14 +91,12 @@ const Searchbar = ({ fireAction = false }: Props) => {
   }, [fireAction]);
   return (
     <Wrapper>
-      <PillContainer>
-        <PillInput
-          type="text"
-          value={searchText}
-          onChange={e => setSearchText(e.target.value)}
-        />
-        <Chevron>Arrow</Chevron>
-      </PillContainer>
+      <PillInput
+        type="text"
+        value={searchText}
+        onChange={e => setSearchText(e.target.value)}
+      />
+      <Chevron />
       <OptionsContainer>
         <InputOption value={paperType} setValue={setPaperType}>
           Paper Type
