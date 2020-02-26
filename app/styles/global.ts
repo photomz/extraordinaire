@@ -2,20 +2,12 @@ const baseNum = 8;
 export default {
   color: {
     white: '#FAFAFA',
-    gray: '#C4C4C4',
-    black: '#111111',
-    orange1: '#FFAF6E',
-    orange2: '#F98D43',
-    orange3: '#F37021',
-    orange4: '#D85700',
-    orange5: '#E85E00',
-    blue1: '#EBFBFF',
-    blue2: '#88FFFC',
-    blue3: '#055399',
-    blue4: '#114060',
-    blue5: '#1B75BC',
-    blue6: '#33B6FF',
-    red: '#FF0000'
+    gray: '#525F7F',
+    lightgray: '#f5f5f5',
+    black: '#212121',
+    purple: '#53f',
+    turquoise: '#05d5ff',
+    lime: '#a6ffcb'
   },
   easingFn: {
     standard: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
@@ -34,6 +26,16 @@ export default {
     padding4: baseNum * 2,
     padding5: baseNum
   },
+  gradient(direction = 150) {
+    return {
+      cool: `linear-gradient(${direction}deg, ${this.color.purple} 15%,${this.color.turquoise} 70%, ${this.color.lime} 94%)`,
+      greenorangepink: `linear-gradient(${direction}deg, #40e0d0 15%, #ff8c00 70%, #ff0080 94%)`,
+      turquoisegreen: `linear-gradient(${direction}deg, #11998e 15%, #38ef7d 70%)`,
+      redblue: `linear-gradient(${direction}deg, #fc466b 15%, #3f5efb 70%)`,
+      yellow: `linear-gradient(${direction}deg, #cac531 15%, #f3f9a7 70%)`,
+      purpleWhite: `linear-gradient(${direction}deg, #03001e, #7303c0, #ec38bc, #fdeff9)`
+    };
+  },
   border: {
     radius1: baseNum * 4,
     radius2: baseNum * 2,
@@ -48,11 +50,6 @@ export default {
     normal: '0px 3px 8px rgba(0, 0, 0, 0.15)',
     repressed: '0px 8px 12px rgba(0, 0, 0, 0.15)'
   },
-  device: {
-    mobile: 'only screen and (max-width: 1199px)',
-    tablet: 'only screen and (min-width: 768px) and (max-width: 1199px)',
-    desktop: 'only screen and (min-width: 1200px)'
-  },
   br: `br {
     content: "";
     display: block;
@@ -60,10 +57,12 @@ export default {
   }`,
   font: {
     size: {
+      headline: 48,
       title: 36,
       subtitle: 28,
       header: 24,
-      paragraph: 14
+      subheader: 20,
+      paragraph: 16
     }
   }
 };
