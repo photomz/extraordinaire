@@ -1,8 +1,9 @@
+const baseNum = 8;
 export default {
   color: {
-    white: '#FFFFFF',
+    white: '#FAFAFA',
     gray: '#C4C4C4',
-    black: '#000000',
+    black: '#111111',
     orange1: '#FFAF6E',
     orange2: '#F98D43',
     orange3: '#F37021',
@@ -21,27 +22,22 @@ export default {
     accelerate: 'cubic-bezier(0.4, 0.0, 1, 1)',
     decelerate: 'cubic-bezier(0.0, 0.0, 0.2, 1)'
   },
-  baseNum: 8,
-  layout() {
-    return {
-      margin1: this.baseNum * 16,
-      margin2: this.baseNum * 8,
-      margin3: this.baseNum * 4,
-      margin4: this.baseNum * 2,
-      margin5: this.baseNum,
-      padding1: this.baseNum * 8,
-      padding2: this.baseNum * 4,
-      padding3: this.baseNum * 3,
-      padding4: this.baseNum * 2,
-      padding5: this.baseNum
-    };
+  layout: {
+    margin1: baseNum * 16,
+    margin2: baseNum * 8,
+    margin3: baseNum * 4,
+    margin4: baseNum * 2,
+    margin5: baseNum,
+    padding1: baseNum * 8,
+    padding2: baseNum * 4,
+    padding3: baseNum * 3,
+    padding4: baseNum * 2,
+    padding5: baseNum
   },
-  border() {
-    return {
-      radius1: this.baseNum * 4,
-      radius2: this.baseNum * 2,
-      radius3: this.baseNum
-    };
+  border: {
+    radius1: baseNum * 4,
+    radius2: baseNum * 2,
+    radius3: baseNum
   },
   ellipsis: `
   white-space: nowrap;
@@ -61,5 +57,13 @@ export default {
     content: "";
     display: block;
     margin: 0.75em 0;
-  }`
+  }`,
+  font: {
+    size: {
+      title: 36,
+      subtitle: 28,
+      header: 24,
+      paragraph: 14
+    }
+  }
 };
