@@ -13,11 +13,11 @@ interface Props {
   setValue: () => void;
 }
 
-const AdvancedOption = ({ children, value, setValue }: Props) => (
+const InputOption = ({ children, value, setValue }: Props) => (
   <Wrapper>
     <Label>{children}</Label>
     <Input type="text" value={value} onChange={setValue} />
   </Wrapper>
 );
 
-export default AdvancedOption;
+export default InputOption;
