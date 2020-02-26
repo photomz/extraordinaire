@@ -2,7 +2,7 @@ import { SearchState } from './types';
 import actions from '../constants/actions.json';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const initalState: SearchState = {
+const initialState: SearchState = {
   keyword: 'Communism',
   year: '',
   paperType: 'qp',
@@ -15,7 +15,7 @@ const initalState: SearchState = {
 };
 
 export default (state: SearchState = initialState, { payload, type }) => {
-  let newState = [...state];
+  let newState = { ...state };
   switch (type) {
     case actions.setSearch:
       newState = {

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { ipcRenderer } from 'electron';
 import { useActions } from '../../utils';
 import { setSearch } from '../../actions/search';
+
+import $ from '../../styles/global';
+import IPC from '../../constants/ipcActions.json';
 
 import InputOption from './InputOption';
 import RadioOptions from './RadioOptions';
 import Checkmark from './Checkmark';
-import $ from '../../styles/global';
 
 const Wrapper = styled.section`
   margin-top: ${$.layout.margin1}px;
@@ -57,20 +60,20 @@ interface Props {
 }
 
 const Searchbar = ({ fireAction = false }: Props) => {
-  const [searchText, setSearchText] = useState('Communism');
-  const [year, setYear] = useState('2019');
-  const [paperType, setPaperType] = useState('qp');
-  const [season, setSeason] = useState('w');
-  const [timezone, setTimezone] = useState('1');
-  const [questionNumber, setQuestionNumber] = useState('8');
-  const [questionLetter, setQuestionLetter] = useState('a');
-  const [isRegex, setIsRegex] = useState(false);
-  const [isTextSearch, setIsTextSearch] = useState(true);
+  const [searchText, setSearchText] = useState<string>('Communism');
+  const [year, setYear] = useState<string>('2019');
+  const [paperType, setPaperType] = useState<string>('qp');
+  const [season, setSeason] = useState<string>('w');
+  const [timezone, setTimezone] = useState<string>('1');
+  const [questionNumber, setQuestionNumber] = useState<string>('8');
+  const [questionLetter, setQuestionLetter] = useState<string>('a');
+  const [isRegex, setIsRegex] = useState<boolean>(false);
+  const [isTextSearch, setIsTextSearch] = useState<boolean>(true);
 
   const setSearchAction = useActions(setSearch);
   useEffect(() => {
     if (fireAction) {
-      setSearchAction({
+      const searchRequest = {
         keyword: searchText,
         year,
         paperType,
@@ -80,13 +83,25 @@ const Searchbar = ({ fireAction = false }: Props) => {
         letter: questionLetter,
         isRegex,
         isTextSearch
-      });
+      };
+      setSearchAction(searchRequest);
+      // TODO: Invoke ipc in new results page, receive args from redux
+      // TODO: Integrate isRegex and isTextSearch in ipcMain and ipcListener
+      // TODO: Globally disable eslint rule below
+      // eslint-disable-next-line promise/catch-or-return
+      ipcRenderer
+        .invoke(IPC.DB.SEARCH, searchRequest)
+        .then(res => console.log(res));
     }
   }, [fireAction]);
   return (
     <Wrapper>
       <PillContainer>
-        <PillInput type="text" value={searchText} onChange={setSearchText} />
+        <PillInput
+          type="text"
+          value={searchText}
+          onChange={e => setSearchText(e.target.value)}
+        />
         <Chevron>Arrow</Chevron>
       </PillContainer>
       <OptionsContainer>

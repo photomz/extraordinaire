@@ -125,7 +125,13 @@ ipcMain.handle(IPC.DB.SEARCH, (e, { keyword, paperType, year }: DBSearchArgs) =>
     .then(res =>
       res.filter(resArr => (paperType ? resArr[0] === paperType : true))
     ) // Paper type
-    .then(res => res.filter(resArr => (year ? resArr[1] === year : true)))
+    .then(res =>
+      res.filter(resArr =>
+        // Type coercion is preferred - resArr[1] is string, year is string
+        // eslint-disable-next-line eqeqeq
+        year ? resArr[1] == year - 2000 : true
+      )
+    )
 ); // Year
 
 export default class AppUpdater {

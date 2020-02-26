@@ -58,8 +58,8 @@ const Checkmark = ({ isChecked, setIsChecked, children }: Props) => (
     {children}
     <InvisibleInput
       type="checkbox"
-      checked={isChecked ? 'checked' : ''}
-      onChange={() => setIsChecked(prev => !!prev)}
+      value={isChecked}
+      onChange={() => setIsChecked(prev => !prev)}
     />
     <Icon active={isChecked} />
   </Wrapper>

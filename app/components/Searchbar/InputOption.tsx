@@ -5,7 +5,10 @@ const Wrapper = styled.div``;
 
 const Label = styled.h4``;
 
-const Input = styled.input``;
+const Input = styled.input`
+  width: 50px;
+  border: 0 solid #000;
+`;
 
 interface Props {
   children: Node | string;
@@ -16,7 +19,7 @@ interface Props {
 const InputOption = ({ children, value, setValue }: Props) => (
   <Wrapper>
     <Label>{children}</Label>
-    <Input type="text" value={value} onChange={setValue} />
+    <Input type="text" value={value} onChange={e => setValue(e.target.value)} />
   </Wrapper>
 );
 
