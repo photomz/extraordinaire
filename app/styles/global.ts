@@ -72,5 +72,6 @@ export default {
       subheader: 20,
       paragraph: 16
     }
-  }
+  },
+  searchButtonWidth: 120
 };
