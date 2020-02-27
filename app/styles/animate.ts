@@ -31,10 +31,7 @@ const smokyAnimation = keyframes`
   }
   to {
     transform:
-      translate3d(15rem,-8rem,0)
-      rotate(-40deg)
-      skewX(70deg)
-      scale(1.5);
+      translate3d(15rem,-8rem,0)rotate(-40deg)skewX(70deg)scale(1.5);
     text-shadow: 0 0 20px whitesmoke;
     opacity: 0;
   }
@@ -45,10 +42,7 @@ const smokyMirrorAnimation = keyframes`
     text-shadow: 0 0 40px whitesmoke; }
   to {
     transform:
-      translate3d(18rem,-8rem,0)
-      rotate(-40deg)
-      skewX(-70deg)
-      scale(2);
+      translate3d(18rem,-8rem,0)rotate(-40deg)skewX(-70deg)scale(2);
     text-shadow: 0 0 20px whitesmoke;
     opacity: 0;
   }

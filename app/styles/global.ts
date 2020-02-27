@@ -2,12 +2,19 @@ const baseNum = 8;
 export default {
   color: {
     white: '#FAFAFA',
-    gray: '#525F7F',
-    lightgray: '#f5f5f5',
     black: '#212121',
-    purple: '#53f',
-    turquoise: '#05d5ff',
-    lime: '#a6ffcb'
+    gray1: '#f5f5f5',
+    gray2: '#525F7F',
+    lime1: '#a6ffcb',
+    lime2: '#00e376',
+    purple1: '#a161f3',
+    purple2: '#833de1',
+    turquoise1: '#05d5ff',
+    turquoise2: '#00a8ff',
+    turquoise3: '#0076cc',
+    blue1: '#0558ff',
+    blue2: '#0044e6',
+    blue3: '#001fcb'
   },
   easingFn: {
     standard: 'cubic-bezier(0.4, 0.0, 0.2, 1)',

@@ -7,7 +7,7 @@ const ChevronSVG = styled.svg`
   width: 20px;
   height: 20px;
   margin-right: ${$.layout.margin5}px;
-  fill: ${$.color.gray};
+  fill: ${$.color.gray2};
   transform: rotate(${({ counter }) => 180 * counter}deg);
   transition: transform 0.5s ${$.easingFn.standard};
 `;

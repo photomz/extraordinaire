@@ -15,6 +15,6 @@ export const setSearch = (payload: SearchState) => ({
 export const changeSearchOption = (
   payload: Record<string, string | boolean>
 ) => ({
-  types: actions.changeOption,
+  type: actions.changeOption,
   payload
 });

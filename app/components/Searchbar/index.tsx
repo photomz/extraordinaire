@@ -44,7 +44,7 @@ const PillInput = styled.input`
 const OptionsContainer = styled.div`
   width: 400px;
   height: 50px;
-  border: 20px solid ${$.color.gray}px;
+  border: 20px solid ${$.color.gray2}px;
   box-shadow: ${$.dropShadow};
   display: flex;
   flex-direction: row;

@@ -13,11 +13,12 @@ const SearchButton = styled.button`
   box-shadow: ${$.dropShadow.normal};
   text-align: center;
   background-color: ${$.color.white};
+  margin-top: ${$.layout.margin1}px;
   &:active,
   &:hover {
     color: ${$.color.white};
     box-shadow: ${$.dropShadow.repressed};
-    background-color: ${$.color.turquoise};
+    background-color: ${$.color.turquoise2};
   }
 `;
 
