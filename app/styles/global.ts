@@ -44,7 +44,7 @@ export default {
     };
   },
   border: {
-    radius1: baseNum * 4,
+    radius1: baseNum * 3,
     radius2: baseNum * 2,
     radius3: baseNum
   },
@@ -69,9 +69,10 @@ export default {
       title: 36,
       subtitle: 28,
       header: 24,
-      subheader: 20,
-      paragraph: 16
+      subheader: 18,
+      paragraph: 14
     }
   },
-  searchButtonWidth: 120
+  searchButtonWidth: 120,
+  searchbarHeight: 50
 };

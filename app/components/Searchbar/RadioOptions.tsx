@@ -14,20 +14,18 @@ import { changeSearchOption } from '../../actions/search';
 import { useActions } from '../../utils';
 
 const Wrapper = styled.div`
-  margin: ${$.layout.margin3}px;
+  margin: ${$.layout.margin5}px;
 `;
 
 const Header = styled.div`
   font-family: 'Aileron Semibold', sans-serif;
-  color: ${$.color.gray2};
+  font-size: ${$.font.size.subheader}px;
+  color: ${$.color.black};
 `;
 
 const RadioContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-content: center;
-  margin: ${$.layout.margin3}px ${$.layout.margin5}px;
+  margin: ${$.layout.margin5}px 0;
+  margin-right: ${$.layout.margin4}px;
 `;
 
 const OuterButton = styled.span`
@@ -36,7 +34,6 @@ const OuterButton = styled.span`
     ${({ isSelected }) => (isSelected ? $.color.turquoise2 : $.color.blue2)};
   width: 20px;
   height: 20px;
-  margin: 10px;
   border-radius: 999px;
   background-color: ${$.color.white};
 `;
@@ -50,9 +47,10 @@ const InnerButton = styled.span`
 `;
 
 const Radio = styled.label`
-  display: inline-block;
-  font-family: 'Aileron Semibold', sans-serif;
-  font-size: ${$.font.size.subheader};
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: center;
   margin-bottom: ${$.layout.margin5}px;
   cursor: pointer;
   &:hover ${InnerButton} {
@@ -66,6 +64,22 @@ const Radio = styled.label`
       isSelected ? $.color.turquoise1 : $.color.blue2};
     transition: all 0.5s ${$.easingFn.standard};
   }
+`;
+
+const LabelContainer = styled.div`
+  margin-left: ${$.layout.margin5}px;
+  height: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`;
+
+const Label = styled.h4`
+  vertical-align: center;
+  font-family: 'Cooper Hewitt Regular', sans-serif;
+  font-size: ${$.font.size.paragraph}px;
+  color: ${$.color.black};
+  margin: 0;
 `;
 
 interface Props {
@@ -96,6 +110,10 @@ const RadioOptions = ({
             <OuterButton isSelected={selectedOption === option}>
               <InnerButton />
             </OuterButton>
+            <LabelContainer>
+              {' '}
+              <Label>{optionLabels[i]}</Label>
+            </LabelContainer>
           </Radio>
         ))}
       </RadioContainer>

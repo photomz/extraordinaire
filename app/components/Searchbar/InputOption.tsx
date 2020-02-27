@@ -3,10 +3,13 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useActions } from '../../utils';
 import { changeSearchOption } from '../../actions/search';
+import $ from '../../styles/global';
 
 const Wrapper = styled.div``;
 
-const Label = styled.h4``;
+const Label = styled.h4`
+  color: ${$.color.black};
+`;
 
 const Input = styled.input`
   width: 50px;

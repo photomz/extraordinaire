@@ -51,10 +51,11 @@ export const PillMain = styled.div`
   position: relative;
   width: 90%;
   max-width: 700px;
-  height: 50px;
+  height: ${$.searchbarHeight}px;
+  box-sizing: border-box;
   margin-bottom: ${$.layout.margin4}px;
   padding: 0 ${$.layout.padding4}px;
-  border-radius: 999px;
+  border-radius: ${$.border.radius1}px;
   border-width: 0;
   box-shadow: ${$.dropShadow.normal};
   vertical-align: middle;
@@ -63,18 +64,33 @@ export const PillMain = styled.div`
   &:hover {
     box-shadow: ${$.dropShadow.repressed};
   }
+  ${({ connectBorder }) =>
+    connectBorder &&
+    `border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: ${$.dropShadow.oppressed}`}
 `;
 
 export const PillExtension = styled.div`
-  width: 400px;
-  height: 50px;
-  border: 20px solid ${$.color.gray2}px;
-  box-shadow: ${$.dropShadow};
-  display: flex;
+  position: absolute;
+  top: ${$.searchbarHeight}px;
+  left: 0;
+  right: 0;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
-  margin-top: ${$.layout.margin1}px;
+  border-radius: ${$.border.radius1}px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 2px solid ${$.color.gray1};
+  width: 100%;
+  box-sizing: border-box;
+  padding: ${$.layout.padding5}px ${$.layout.padding4}px;
+  box-shadow: ${$.dropShadow.oppressed};
+  background-color: ${$.color.white};
+  display: ${({ visible }) => (visible ? 'flex' : 'none')};
+  transition: all 0.5s ${$.easingFn.accelerate};
 `;
 
 export const InputContainer = styled.div`

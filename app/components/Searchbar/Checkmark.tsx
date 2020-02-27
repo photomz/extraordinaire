@@ -29,8 +29,9 @@ const Icon = styled.span`
 `;
 
 const Wrapper = styled.label`
-  font-family: 'Aileron Regular', sans-serif;
-  font-size: ${$.font.size.paragraph}px;
+  font-family: 'PT Sans Regular', sans-serif;
+  font-size: ${$.font.size.subheader}px;
+  color: ${$.color.black};
   display: block;
   position: relative;
   padding-left: 35px;

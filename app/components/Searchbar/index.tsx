@@ -25,23 +25,26 @@ const Wrapper = styled.section`
   justify-content: center;
   margin-top: ${$.layout.margin2}px;
   width: 100%;
+  height: 50%;
 `;
 
 const Searchbar = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
   const [searchText, setSearchText] = useState<string>('Communism');
+  const [isExtended, setIsExtended] = useState<boolean>(false);
+  console.log(isExtended);
   // TODO: Invoke ipc in new results page, receive args from redux
   // TODO: Componentalise PillInput
   return (
     <Wrapper>
-      <PillMain>
+      <PillMain connectBorder={isExtended}>
         <InputContainer>
           <PillInput
             type="text"
             value={searchText}
             onChange={e => setSearchText(e.target.value)}
           />
-          <Chevron />
+          <Chevron handler={() => setIsExtended(prev => !prev)} />
         </InputContainer>
 
         <SearchButton
@@ -54,8 +57,14 @@ const Searchbar = () => {
         >
           Search
         </SearchButton>
-        <PillExtension>
-          <InputOption selectorName="paperType">Paper Type</InputOption>
+        <PillExtension visible={isExtended}>
+          <RadioOptions
+            optionLabels={['Question Paper', 'Mark Scheme']}
+            options={['qp', 'ms']}
+            selectorName="paperType"
+          >
+            Paper Type
+          </RadioOptions>
           <InputOption selectorName="year">Year</InputOption>
           <RadioOptions
             optionLabels={['March', 'Spring', 'Winter']}
