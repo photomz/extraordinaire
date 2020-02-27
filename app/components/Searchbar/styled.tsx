@@ -89,8 +89,10 @@ export const PillExtension = styled.div`
   padding: ${$.layout.padding5}px ${$.layout.padding4}px;
   box-shadow: ${$.dropShadow.oppressed};
   background-color: ${$.color.white};
-  display: ${({ visible }) => (visible ? 'flex' : 'none')};
-  transition: all 0.5s ${$.easingFn.accelerate};
+  display: flex;
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  transition: opacity 0.5s ${$.easingFn.accelerate};
 `;
 
 export const InputContainer = styled.div`
