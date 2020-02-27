@@ -55,7 +55,8 @@ export default {
   `,
   dropShadow: {
     normal: '0px 3px 8px rgba(0, 0, 0, 0.15)',
-    repressed: '0px 8px 12px rgba(0, 0, 0, 0.15)'
+    repressed: '0px 8px 12px rgba(0, 0, 0, 0.15)',
+    oppressed: '0px 15px 18px rgba(0, 0, 0, 0.2)'
   },
   br: `br {
     content: "";

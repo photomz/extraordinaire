@@ -64,7 +64,7 @@ const Radio = styled.label`
     opacity: ${({ isSelected }) => (isSelected ? 1 : 0)};
     background-color: ${({ isSelected }) =>
       isSelected ? $.color.turquoise1 : $.color.blue2};
-    transition: all 0.25s ease-in-out;
+    transition: all 0.5s ${$.easingFn.standard};
   }
 `;
 

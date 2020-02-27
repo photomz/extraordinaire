@@ -2,18 +2,19 @@ import styled from 'styled-components';
 import $ from '../styles/global';
 
 const SearchButton = styled.button`
-  font-family: Aileron Regular, sans-serif;
-  text-transform: uppercase;
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-family: Aileron Heavy, sans-serif;
   font-size: ${$.font.size.header}px;
-  box-sizing: border-box;
-  width: 90%;
-  padding: ${$.layout.padding3}px 0;
-  border: 0 solid #000;
-  border-radius: 10px;
-  box-shadow: ${$.dropShadow.normal};
+  padding: 0 ${$.layout.padding4}px;
+  height: calc(100% - 4px);
+  width: 125px;
+  box-sizing: content-box;
+  border: 2px solid ${$.color.gray1};
+  border-radius: 99px;
   text-align: center;
   background-color: ${$.color.white};
-  margin-top: ${$.layout.margin1}px;
   &:active,
   &:hover {
     color: ${$.color.white};

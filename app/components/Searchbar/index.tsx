@@ -1,47 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ipcRenderer } from 'electron';
-import { useActions } from '../../utils';
-import { setSearch } from '../../actions/search';
 
 import $ from '../../styles/global';
 import IPC from '../../constants/ipcActions.json';
+import { SearchState } from '../../reducers/types';
 
+import Chevron from '../Chevron';
+import SearchButton from '../SearchButton';
 import InputOption from './InputOption';
 import RadioOptions from './RadioOptions';
 import Checkmark from './Checkmark';
-import Chevron from '../Chevron';
-import { SearchState } from '../../reducers/types';
 
 const Wrapper = styled.section`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   margin-top: ${$.layout.margin2}px;
+  width: 100%;
 `;
 
-const PillInput = styled.input`
-  display: block;
-  width: calc(100% - ${2 * $.layout.margin4}px);
-  padding: ${$.layout.padding4}px;
+const PillMain = styled.div`
+  /* display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch; */
+  position: relative;
+  width: 90%;
+  max-width: 700px;
+  height: 50px;
   margin-bottom: ${$.layout.margin4}px;
-  height: 18;
-  font-family: 'Aileron Semibold', sans-serif;
-  border-width: 0;
+  padding: 0 ${$.layout.padding4}px;
   border-radius: 999px;
+  border-width: 0;
   box-shadow: ${$.dropShadow.normal};
-  text-align: left;
   vertical-align: middle;
   background-color: ${$.color.white};
-  font-size: ${$.font.size.header}px;
-  text-decoration: none;
-  color: ${$.color.black};
   &:focus,
   &:hover {
-    outline: none;
     box-shadow: ${$.dropShadow.repressed};
   }
 `;
 
-const OptionsContainer = styled.div`
+const PillExtension = styled.div`
   width: 400px;
   height: 50px;
   border: 20px solid ${$.color.gray2}px;
@@ -50,52 +52,80 @@ const OptionsContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-top: ${$.layout.margin1}px;
 `;
 
-interface Props {
-  fireAction: number;
-}
+const PillInput = styled.input`
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: calc(
+    100% - ${$.layout.padding3}px - 125px - ${3 * $.layout.padding4}px
+  );
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  padding-left: ${$.layout.padding3}px;
+  border-width: 0;
+  border-radius: 999px;
+  font-family: 'Aileron Semibold', sans-serif;
+  text-decoration: none;
+  text-align: left;
+  background-color: ${$.color.white};
+  font-size: ${$.font.size.header}px;
+  color: ${$.color.black};
+  &:focus,
+  &:hover {
+    outline: none;
+  }
+`;
 
-const Searchbar = ({ fireAction = 0 }: Props) => {
+const Searchbar = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
   const [searchText, setSearchText] = useState<string>('Communism');
-  useEffect(() => {
-    // TODO: Invoke ipc in new results page, receive args from redux
-    // TODO: Integrate isRegex and isTextSearch in ipcMain and ipcListener
-    // TODO: Globally disable eslint rule below
-    // eslint-disable-next-line promise/catch-or-return
-    ipcRenderer
-      .invoke(IPC.DB.SEARCH, { keyword: searchText, ...searchOptions })
-      .then(res => console.log(res));
-  }, [fireAction]);
+  // TODO: Invoke ipc in new results page, receive args from redux
+  // TODO: Componentalise PillInput
   return (
     <Wrapper>
-      <PillInput
-        type="text"
-        value={searchText}
-        onChange={e => setSearchText(e.target.value)}
-      />
-      <Chevron />
-      <OptionsContainer>
-        <InputOption selectorName="paperType">Paper Type</InputOption>
-        <InputOption selectorName="year">Year</InputOption>
-        <RadioOptions
-          optionLabels={['March', 'Spring', 'Winter']}
-          options={['m', 's', 'w']}
-          selectorName="season"
+      <PillMain>
+        <PillInput
+          type="text"
+          value={searchText}
+          onChange={e => setSearchText(e.target.value)}
+        />
+        <Chevron />
+        <SearchButton
+          onClick={() => {
+            // eslint-disable-next-line promise/catch-or-return
+            ipcRenderer
+              .invoke(IPC.DB.SEARCH, { keyword: searchText, ...searchOptions })
+              .then(res => console.log(res));
+          }}
         >
-          Season
-        </RadioOptions>
-        <RadioOptions options={['1', '2', '3']} selectorName="timezone">
-          Time Zone
-        </RadioOptions>
-        <InputOption selectorName="number">Question Number</InputOption>
-        <RadioOptions options={['a', 'b', 'c']} selectorName="letter">
-          Question Letter
-        </RadioOptions>
-        <Checkmark selectorName="isRegex">Regex</Checkmark>
-        <Checkmark selectorName="isTextSearch">Search By Text</Checkmark>
-      </OptionsContainer>
+          Search
+        </SearchButton>
+        <PillExtension>
+          <InputOption selectorName="paperType">Paper Type</InputOption>
+          <InputOption selectorName="year">Year</InputOption>
+          <RadioOptions
+            optionLabels={['March', 'Spring', 'Winter']}
+            options={['m', 's', 'w']}
+            selectorName="season"
+          >
+            Season
+          </RadioOptions>
+          <RadioOptions options={['1', '2', '3']} selectorName="timezone">
+            Time Zone
+          </RadioOptions>
+          <InputOption selectorName="number">Question Number</InputOption>
+          <RadioOptions options={['a', 'b', 'c']} selectorName="letter">
+            Question Letter
+          </RadioOptions>
+          <Checkmark selectorName="isRegex">Regex</Checkmark>
+          <Checkmark selectorName="isTextSearch">Search By Text</Checkmark>
+        </PillExtension>
+      </PillMain>
     </Wrapper>
   );
 };

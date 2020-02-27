@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import Searchbar from '../components/Searchbar';
-import SearchButton from '../components/SearchButton';
 import Landing from '../components/Landing';
 
 import Logo from '../../resources/icon.png';
@@ -17,17 +16,11 @@ const Wrapper = styled.section`
   align-content: center;
 `;
 
-const HomePage = () => {
-  const [fireAction, setFireAction] = useState(0);
-  return (
-    <Wrapper>
-      <Landing src={Logo}>The Extraordinaire</Landing>
-      <Searchbar fireAction={fireAction} />
-      <SearchButton onClick={() => setFireAction(prev => prev + 1)}>
-        Search
-      </SearchButton>
-    </Wrapper>
-  );
-};
+const HomePage = () => (
+  <Wrapper>
+    <Landing src={Logo}>The Extraordinaire</Landing>
+    <Searchbar />
+  </Wrapper>
+);
 
 export default HomePage;
