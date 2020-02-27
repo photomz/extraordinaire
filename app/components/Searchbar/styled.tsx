@@ -57,18 +57,20 @@ export const PillMain = styled.div`
   padding: 0 ${$.layout.padding4}px;
   border-radius: ${$.border.radius1}px;
   border-width: 0;
-  box-shadow: ${$.dropShadow.normal};
   vertical-align: middle;
   background-color: ${$.color.white};
   &:focus,
   &:hover {
     box-shadow: ${$.dropShadow.repressed};
   }
-  ${({ connectBorder }) =>
-    connectBorder &&
-    `border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: ${$.dropShadow.oppressed}`}
+  box-shadow: ${({ connectBorder }) =>
+    connectBorder ? $.dropShadow.normal : $.dropShadow.oppressed};
+  border-bottom-left-radius: ${({ connectBorder }) =>
+    connectBorder ? $.border.radius1 : 0}px;
+  border-bottom-right-radius: ${({ connectBorder }) =>
+    connectBorder ? $.border.radius1 : 0}px;
+  transition: box-shadow, border-bottom-left-radius,
+    border-bottom-right-radius 0.5s ${$.easingFn.standard};
 `;
 
 export const PillExtension = styled.div`
