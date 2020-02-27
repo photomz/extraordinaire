@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { ipcRenderer } from 'electron';
 import { useActions } from '../../utils';
@@ -11,6 +12,7 @@ import InputOption from './InputOption';
 import RadioOptions from './RadioOptions';
 import Checkmark from './Checkmark';
 import Chevron from '../Chevron';
+import { SearchState } from '../../reducers/types';
 
 const Wrapper = styled.section`
   margin-top: ${$.layout.margin2}px;
@@ -51,43 +53,20 @@ const OptionsContainer = styled.div`
 `;
 
 interface Props {
-  fireAction: boolean;
+  fireAction: number;
 }
 
-const Searchbar = ({ fireAction = false }: Props) => {
+const Searchbar = ({ fireAction = 0 }: Props) => {
+  const searchOptions: SearchState = useSelector(state => state.search);
   const [searchText, setSearchText] = useState<string>('Communism');
-  const [year, setYear] = useState<string>('2019');
-  const [paperType, setPaperType] = useState<string>('qp');
-  const [season, setSeason] = useState<string>('w');
-  const [timezone, setTimezone] = useState<string>('1');
-  const [questionNumber, setQuestionNumber] = useState<string>('8');
-  const [questionLetter, setQuestionLetter] = useState<string>('a');
-  const [isRegex, setIsRegex] = useState<boolean>(false);
-  const [isTextSearch, setIsTextSearch] = useState<boolean>(true);
-
-  const setSearchAction = useActions(setSearch);
   useEffect(() => {
-    if (fireAction) {
-      const searchRequest = {
-        keyword: searchText,
-        year,
-        paperType,
-        season,
-        timezone,
-        number: questionNumber,
-        letter: questionLetter,
-        isRegex,
-        isTextSearch
-      };
-      setSearchAction(searchRequest);
-      // TODO: Invoke ipc in new results page, receive args from redux
-      // TODO: Integrate isRegex and isTextSearch in ipcMain and ipcListener
-      // TODO: Globally disable eslint rule below
-      // eslint-disable-next-line promise/catch-or-return
-      ipcRenderer
-        .invoke(IPC.DB.SEARCH, searchRequest)
-        .then(res => console.log(res));
-    }
+    // TODO: Invoke ipc in new results page, receive args from redux
+    // TODO: Integrate isRegex and isTextSearch in ipcMain and ipcListener
+    // TODO: Globally disable eslint rule below
+    // eslint-disable-next-line promise/catch-or-return
+    ipcRenderer
+      .invoke(IPC.DB.SEARCH, { keyword: searchText, ...searchOptions })
+      .then(res => console.log(res));
   }, [fireAction]);
   return (
     <Wrapper>
@@ -98,43 +77,24 @@ const Searchbar = ({ fireAction = false }: Props) => {
       />
       <Chevron />
       <OptionsContainer>
-        <InputOption value={paperType} setValue={setPaperType}>
-          Paper Type
-        </InputOption>
-        <InputOption value={year} setValue={setYear}>
-          Year
-        </InputOption>
+        <InputOption selectorName="paperType">Paper Type</InputOption>
+        <InputOption selectorName="year">Year</InputOption>
         <RadioOptions
-          value={season}
-          setValue={setSeason}
-          labels={['March', 'Spring', 'Winter']}
+          optionLabels={['March', 'Spring', 'Winter']}
           options={['m', 's', 'w']}
+          selectorName="season"
         >
           Season
         </RadioOptions>
-        <RadioOptions
-          value={timezone}
-          setValue={setTimezone}
-          options={['1', '2', '3']}
-        >
+        <RadioOptions options={['1', '2', '3']} selectorName="timezone">
           Time Zone
         </RadioOptions>
-        <InputOption value={questionNumber} setValue={setQuestionNumber}>
-          Question Number
-        </InputOption>
-        <RadioOptions
-          value={questionLetter}
-          setValue={setQuestionLetter}
-          options={['a', 'b', 'c']}
-        >
+        <InputOption selectorName="number">Question Number</InputOption>
+        <RadioOptions options={['a', 'b', 'c']} selectorName="letter">
           Question Letter
         </RadioOptions>
-        <Checkmark isChecked={isRegex} setIsChecked={setIsRegex}>
-          Regex
-        </Checkmark>
-        <Checkmark isChecked={isTextSearch} setIsChecked={setIsTextSearch}>
-          Search By Text
-        </Checkmark>
+        <Checkmark selectorName="isRegex">Regex</Checkmark>
+        <Checkmark selectorName="isTextSearch">Search By Text</Checkmark>
       </OptionsContainer>
     </Wrapper>
   );

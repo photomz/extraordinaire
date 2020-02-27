@@ -1,6 +1,9 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import shortid from 'shortid';
+import { useActions } from '../../utils';
+import { changeSearchOption } from '../../actions/search';
 import $ from '../../styles/global';
 
 const Wrapper = styled.div`
@@ -23,32 +26,34 @@ const PillOption = styled.div`
 interface Props {
   children: string | Node;
   options: string[];
-  labels: string[];
-  value: string;
-  setValue: () => void;
+  optionLabels: string[];
+  selectorName: string;
 }
 
 const RadioOptions = ({
   children,
   options,
-  labels = options,
-  value,
-  setValue
-}: Props) => (
-  <Wrapper>
-    <Label>{children}</Label>
-    <PillContainer>
-      {options.map((option, i) => (
-        <PillOption
-          key={shortid.generate()}
-          onClick={() => setValue(option)}
-          isSelected={value === option}
-        >
-          {labels[i]}
-        </PillOption>
-      ))}
-    </PillContainer>
-  </Wrapper>
-);
+  optionLabels = options,
+  selectorName
+}: Props) => {
+  const selectedOption = useSelector(state => state.counter[selectorName]);
+  const changeOptionAction = useActions(changeSearchOption);
+  return (
+    <Wrapper>
+      <Label>{children}</Label>
+      <PillContainer>
+        {options.map((option, i) => (
+          <PillOption
+            key={shortid.generate()}
+            onClick={() => changeOptionAction({ [selectorName]: option })}
+            isSelected={selectedOption === option}
+          >
+            {optionLabels[i]}
+          </PillOption>
+        ))}
+      </PillContainer>
+    </Wrapper>
+  );
+};
 
 export default RadioOptions;

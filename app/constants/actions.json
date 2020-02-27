@@ -1,3 +1,4 @@
 {
-  "setSearch": "SET_SEARCH_INFORMATION"
+  "setSearch": "SET_SEARCH_OPTIONS",
+  "changeOption": "CHANGE_SEARCH_OPTION"
 }

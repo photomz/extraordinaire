@@ -1,5 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useActions } from '../../utils';
+import { changeSearchOption } from '../../actions/search';
 
 const Wrapper = styled.div``;
 
@@ -12,15 +15,22 @@ const Input = styled.input`
 
 interface Props {
   children: Node | string;
-  value: string;
-  setValue: () => void;
+  selectorName: string;
 }
 
-const InputOption = ({ children, value, setValue }: Props) => (
-  <Wrapper>
-    <Label>{children}</Label>
-    <Input type="text" value={value} onChange={e => setValue(e.target.value)} />
-  </Wrapper>
-);
+const InputOption = ({ children, selectorName }: Props) => {
+  const input = useSelector(state => state.search[selectorName]);
+  const changeInputAction = useActions(changeSearchOption);
+  return (
+    <Wrapper>
+      <Label>{children}</Label>
+      <Input
+        type="text"
+        value={input}
+        onChange={e => changeInputAction({ [selectorName]: e.target.value })}
+      />
+    </Wrapper>
+  );
+};
 
 export default InputOption;

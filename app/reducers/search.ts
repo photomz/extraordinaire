@@ -15,14 +15,17 @@ const initialState: SearchState = {
 };
 
 export default (state: SearchState = initialState, { payload, type }) => {
-  let newState = { ...state };
   switch (type) {
-    case actions.setSearch:
-      newState = {
-        ...newState,
+    case actions.changeOption:
+      return {
+        ...state,
         ...payload
       };
-      return newState;
+    case actions.setSearch:
+      return {
+        ...state,
+        ...payload
+      };
     default:
       return state;
   }

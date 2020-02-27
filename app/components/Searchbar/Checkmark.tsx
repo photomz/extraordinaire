@@ -1,5 +1,8 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useActions } from '../../utils';
+import { changeSearchOption } from '../../actions/search';
 import $ from '../../styles/global';
 
 const Icon = styled.span`
@@ -48,21 +51,24 @@ const InvisibleInput = styled.input`
 `;
 
 interface Props {
-  isChecked: boolean;
-  setIsChecked: () => void;
   children: string | Node;
+  selectorName: string;
 }
 
-const Checkmark = ({ isChecked, setIsChecked, children }: Props) => (
-  <Wrapper>
-    {children}
-    <InvisibleInput
-      type="checkbox"
-      value={isChecked}
-      onChange={() => setIsChecked(prev => !prev)}
-    />
-    <Icon active={isChecked} />
-  </Wrapper>
-);
+const Checkmark = ({ selectorName, children }: Props) => {
+  const isChecked = useSelector(state => state.search[selectorName]);
+  const changeCheckedAction = useActions(changeSearchOption);
+  return (
+    <Wrapper>
+      {children}
+      <InvisibleInput
+        type="checkbox"
+        value={isChecked}
+        onChange={() => changeCheckedAction({ [selectorName]: !isChecked })}
+      />
+      <Icon active={isChecked} />
+    </Wrapper>
+  );
+};
 
 export default Checkmark;
