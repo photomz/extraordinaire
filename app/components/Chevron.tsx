@@ -4,7 +4,7 @@ import $ from '../styles/global';
 
 const Wrapper = styled.div`
   height: 100%;
-  width: 25px;
+  width: ${({ size }) => size}px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 const ChevronSVG = styled.svg`
   cursor: pointer;
   width: 100%;
-  height: 25px;
+  height: ${({ size }) => size}px;
   margin-right: ${$.layout.margin5}px;
   fill: ${$.color.gray2};
   transform: rotate(${({ counter }) => 180 * counter}deg);
@@ -22,13 +22,15 @@ const ChevronSVG = styled.svg`
 
 interface Props {
   handler: () => void;
+  size: number;
 }
 
-const Chevron = ({ handler = () => {} }: Props) => {
+const Chevron = ({ handler = () => {}, size = 25 }: Props) => {
   const [counter, setCounter] = useState(0);
   return (
-    <Wrapper>
+    <Wrapper size={size}>
       <ChevronSVG
+        size={size}
         viewBox="0 0 9 5.56"
         counter={counter}
         onClick={e => {

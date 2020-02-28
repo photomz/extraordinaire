@@ -24,27 +24,6 @@ export const SearchButton = styled.button`
   }
 `;
 
-export const PillInput = styled.input`
-  display: block;
-  width: calc(100% - ${$.layout.padding4}px);
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  padding-left: ${$.layout.padding4}px;
-  border-width: 0;
-  border-radius: 999px;
-  font-family: 'Aileron Semibold', sans-serif;
-  text-decoration: none;
-  text-align: left;
-  background-color: ${$.color.white};
-  font-size: ${$.font.size.header}px;
-  color: ${$.color.black};
-  &:focus,
-  &:hover {
-    outline: none;
-  }
-`;
-
 export const PillMain = styled.div`
   /* display: flex;
   flex-direction: row;
@@ -96,13 +75,4 @@ export const PillExtension = styled.div`
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transition: opacity 0.5s ${$.easingFn.accelerate};
-`;
-
-export const InputContainer = styled.div`
-  width: calc(100% - ${$.searchButtonWidth}px);
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: stretch;
 `;
