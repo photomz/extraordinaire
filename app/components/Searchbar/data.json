@@ -1,0 +1,48 @@
+[
+  {
+    "component": "radio",
+    "optionLabels": ["Question Paper", "Mark Scheme"],
+    "options": ["qp", "ms"],
+    "selectorName": "paperType",
+    "header": "Paper Type"
+  },
+  {
+    "component": "input",
+    "selectorName": "year",
+    "header": "Year"
+  },
+  {
+    "component": "radio",
+    "optionLabels": ["March", "Spring", "Winter"],
+    "options": ["m", "s", "w"],
+    "selectorName": "season",
+    "header": "Season"
+  },
+  {
+    "component": "radio",
+    "options": ["1", "2", "3"],
+    "selectorName": "timezone",
+    "header": "Time Zone"
+  },
+  {
+    "component": "input",
+    "selectorName": "number",
+    "header": "Question Number"
+  },
+  {
+    "component": "radio",
+    "options": ["a", "b", "c"],
+    "selectorName": "letter",
+    "header": "Question Letter"
+  },
+  {
+    "component": "checkmark",
+    "selectorName": "isRegex",
+    "header": "Regex"
+  },
+  {
+    "component": "checkmark",
+    "selectorName": "isTextSearch",
+    "header": "Search By Text"
+  }
+]

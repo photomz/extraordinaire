@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
@@ -6,6 +7,8 @@ import { ipcRenderer } from 'electron';
 
 import $ from '../../styles/global';
 import IPC from '../../constants/ipcActions.json';
+import data from './data.json';
+import { addKeys } from '../../utils';
 import { SearchState } from '../../reducers/types';
 
 import Chevron from '../Chevron';
@@ -16,9 +19,11 @@ import {
   PillInput,
   InputContainer
 } from './styled';
-import InputOption from './InputOption';
-import RadioOptions from './RadioOptions';
+import Input from './Input';
+import Radio from './Radio';
 import Checkmark from './Checkmark';
+
+const dataWithKeys = addKeys(data);
 
 const Wrapper = styled.section`
   display: flex;
@@ -67,30 +72,18 @@ const Searchbar = () => {
           />
         </SearchButton>
         <PillExtension visible={isExtended}>
-          <RadioOptions
-            optionLabels={['Question Paper', 'Mark Scheme']}
-            options={['qp', 'ms']}
-            selectorName="paperType"
-          >
-            Paper Type
-          </RadioOptions>
-          <InputOption selectorName="year">Year</InputOption>
-          <RadioOptions
-            optionLabels={['March', 'Spring', 'Winter']}
-            options={['m', 's', 'w']}
-            selectorName="season"
-          >
-            Season
-          </RadioOptions>
-          <RadioOptions options={['1', '2', '3']} selectorName="timezone">
-            Time Zone
-          </RadioOptions>
-          <InputOption selectorName="number">Question Number</InputOption>
-          <RadioOptions options={['a', 'b', 'c']} selectorName="letter">
-            Question Letter
-          </RadioOptions>
-          <Checkmark selectorName="isRegex">Regex</Checkmark>
-          <Checkmark selectorName="isTextSearch">Search By Text</Checkmark>
+          {dataWithKeys.map(({ key, header, component, ...rest }) => {
+            switch (component) {
+              case 'radio':
+                return <Radio {...rest}>{header}</Radio>;
+              case 'input':
+                return <Input {...rest}>{header}</Input>;
+              case 'checkmark':
+                return <Checkmark {...rest}>{header}</Checkmark>;
+              default:
+                throw new Error('Invalid JSON');
+            }
+          })}
         </PillExtension>
       </PillMain>
     </Wrapper>
