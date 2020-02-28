@@ -104,7 +104,6 @@ const RadioOptions = ({
               <InnerButton />
             </OuterButton>
             <LabelContainer>
-              {' '}
               <Label>{optionLabels[i]}</Label>
             </LabelContainer>
           </Radio>

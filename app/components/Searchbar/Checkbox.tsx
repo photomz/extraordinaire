@@ -12,19 +12,18 @@ import {
 } from '../../styles/animate';
 
 const Check = styled.span`
-  /* transform: translateZ(0) Force 3d rendering */
   position: relative;
   display: inline-block;
-  width: ${({ size }) => size}px;
-  height: ${({ size }) => size}px;
+  width: 20px;
+  height: 20px;
   border: 2px solid;
   border-radius: 2px;
   overflow: hidden;
   z-index: 1;
-  color: #2FAEF8;
+  color: ${$.color.blue1};
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     transform: rotate(45deg);
     display: block;
     margin-top: -4px;
@@ -45,35 +44,15 @@ const Check = styled.span`
             0 0 0 0,
             0 0 0 0,
             0 0 0 0,
-            0 0 0 0 inset;
+            0 0 0 0 inset
     `};
-    animation: ${({ isChecked }) =>
-      isChecked ? checkboxOn : checkboxOff} 0.5s forwards ${
-  $.easingFn.decelerate
-};
-    animation: ${({ isChecked }) => (isChecked ? rippleOff : rippleOn)} 0.5s
+    animation: ${({ isChecked }) => (isChecked ? checkboxOn : checkboxOff)} 0.6s
       forwards ${$.easingFn.decelerate};
   }
-
-  /* position: absolute;
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: ${({ active }) => (active ? $.color.blue3 : '#eee')};
   &::after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-    display: ${({ active }) => (active ? 'block' : 'none')};
-    ${({ active }) =>
-      active &&
-      `content: "";
-  position: absolute;`} */
+    animation: ${({ isChecked }) => (isChecked ? rippleOn : rippleOff)} 0.3s
+      forwards ${$.easingFn.decelerate};
+  }
 `;
 
 const CheckboxMaterial = styled.span`
@@ -91,31 +70,24 @@ const CheckboxMaterial = styled.span`
     z-index: 1;
     opacity: 0;
     margin: 0;
-    background-color: #2faef8;
-    color: ${({ isChecked }) => (isChecked ? '#2FAEF8' : $.color.gray2)};
-    animation: ${({ isChecked }) => (isChecked ? rippleOff : rippleOn)} 0.5s
+    background-color: ${$.color.blue1};
+    color: ${({ isChecked }) => (isChecked ? $.color.blue1 : $.color.gray2)};
+    animation: ${({ isChecked }) => (isChecked ? rippleOn : rippleOff)} 0.3s
       forwards ${$.easingFn.decelerate};
-
-    /* transform: scale3d(2.3, 2.3, 1); */
   }
 `;
 
 const Wrapper = styled.label`
-  font-family: 'PT Sans Regular', sans-serif;
-  font-size: ${$.font.size.subheader}px;
-  color: ${$.color.black};
-
-  /* display: block; */
-  position: relative;
-
-  /* padding-left: 35px;
-  margin-bottom: 12px; */
   cursor: pointer;
-
-  /* user-select: none;
-  &:hover ${Check} {
-    background-color: #ccc;
-  } */
+  padding: ${$.layout.margin5}px ${$.layout.margin4}px;
+  background: ${$.color.white};
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  &&& * {
+    box-sizing: border-box;
+  }
 `;
 
 // Hide nativer checkbox
@@ -129,32 +101,53 @@ const InvisibleInput = styled.input`
   overflow: hidden;
   left: 0;
   pointer-events: none;
-  &:focus + ${Check}::after {
+`;
+
+const CheckboxContainer = styled.div`
+  display: inline-block;
+  padding: 10px 20px;
+  transform: translateZ(0);
+  &:focus ${Check}::after {
     opacity: 0.2;
   }
+`;
+
+const Header = styled.h4`
+  font-family: 'PT Sans Regular', sans-serif;
+  font-size: ${$.font.size.subheader}px;
+  color: ${$.color.black};
+  margin: 0;
+  margin-left: ${$.layout.margin5}px;
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 interface Props {
   children: string | Node;
   selectorName: string;
-  size: number;
 }
 
-const Checkbox = ({ selectorName, children, size = 25 }: Props) => {
+const Checkbox = ({ selectorName, children }: Props) => {
   const isChecked = useSelector(state => state.search[selectorName]);
   const changeCheckedAction = useActions(changeSearchOption);
   return (
-    <Wrapper>
-      {children}
-      <InvisibleInput
-        type="checkbox"
-        value={isChecked}
-        onChange={() => changeCheckedAction({ [selectorName]: !isChecked })}
-      />
-      <CheckboxMaterial isChecked={isChecked}>
-        <Check isChecked={isChecked} size={size} />
-      </CheckboxMaterial>
-    </Wrapper>
+    <CheckboxContainer>
+      <Wrapper>
+        <InvisibleInput
+          type="checkbox"
+          value={isChecked}
+          onChange={() => changeCheckedAction({ [selectorName]: !isChecked })}
+        />
+        <CheckboxMaterial isChecked={isChecked}>
+          <Check isChecked={isChecked} />
+        </CheckboxMaterial>
+        <Header>{children}</Header>
+      </Wrapper>
+    </CheckboxContainer>
   );
 };
 

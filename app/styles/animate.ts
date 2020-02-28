@@ -217,19 +217,23 @@ export const checkboxOff = keyframes`
   `;
 export const rippleOn = keyframes`
   0% {
-    opacity: 0.5;
+        opacity: 0.5;
+        text-shadow: 0 0 40px whitesmoke;
   }
   100% {
-    opacity: 0;
+opacity: 0;
     transform: scale(13,13);
+    text-shadow: 0 0 20px whitesmoke;
   }
 `;
 export const rippleOff = keyframes`
   0% {
     opacity: 0.5;
+    text-shadow: 0 0 10px whitesmoke;
   }
   100% {
     opacity: 0;
     transform: scale(13,13);
+    text-shadow: 0 0 30px whitesmoke;
   }
 `;
