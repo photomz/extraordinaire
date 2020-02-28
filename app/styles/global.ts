@@ -73,6 +73,6 @@ export default {
       paragraph: 14
     }
   },
-  searchButtonWidth: 120,
+  searchButtonWidth: 65,
   searchbarHeight: 50
 };

@@ -23,7 +23,7 @@ const Label = styled.h4`
   pointer-events: none;
   left: 5px;
   top: 10px;
-  transition: all 0.3s ${$.easingFn.standard};
+  transition: all 0.5s ${$.easingFn.standard};
   ${({ textExists }) =>
     textExists &&
     `    top: -10px;
@@ -43,7 +43,7 @@ const BottomBar = styled.span`
     bottom: 1px;
     position: absolute;
     background: ${$.color.blue1};
-    transition: all 0.3s ${$.easingFn.standard};
+    transition: all 0.5s ${$.easingFn.standard};
   }
   &::before {
     left: 50%;
@@ -91,7 +91,7 @@ const Input = styled.input`
     color: ${$.color.gray2};
   }
   &:focus ~ ${Highlighter} {
-    animation: ${highlight} 0.3s ${$.easingFn.standard};
+    animation: ${highlight} 0.5s ${$.easingFn.standard};
   }
   &:focus ~ ${BottomBar}::before, &:focus ~ ${BottomBar}::after {
     width: 50%;

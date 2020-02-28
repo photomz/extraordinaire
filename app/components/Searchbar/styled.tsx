@@ -19,8 +19,10 @@ export const SearchButton = styled.button`
   background-color: ${$.color.white};
   &:active,
   &:hover {
+    outline: none;
     color: ${$.color.white};
     background-color: ${$.color.turquoise2};
+    box-shadow: ${$.dropShadow.oppressed};
   }
 `;
 
@@ -74,5 +76,5 @@ export const PillExtension = styled.div`
   display: flex;
   visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: opacity 0.5s ${$.easingFn.accelerate};
+  transition: all 0.5s ${$.easingFn.standard};
 `;

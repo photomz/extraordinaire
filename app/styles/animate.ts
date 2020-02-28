@@ -1,7 +1,7 @@
 import { css, keyframes } from 'styled-components';
 import $ from './global';
 
-const strikeAnimation = keyframes`
+export const strikeAnimation = keyframes`
   from {
     width: 0;
   }
@@ -10,7 +10,7 @@ const strikeAnimation = keyframes`
   }
 `;
 
-const strike = css`
+export const strike = css`
   position: relative;
   &::after {
     content: ' ';
@@ -25,7 +25,7 @@ const strike = css`
   }
 `;
 
-const smokyAnimation = keyframes`
+export const smokyAnimation = keyframes`
   60% {
     text-shadow: 0 0 40px whitesmoke;
   }
@@ -37,7 +37,7 @@ const smokyAnimation = keyframes`
   }
 `;
 
-const smokyMirrorAnimation = keyframes`
+export const smokyMirrorAnimation = keyframes`
   60% {
     text-shadow: 0 0 40px whitesmoke; }
   to {
@@ -48,7 +48,7 @@ const smokyMirrorAnimation = keyframes`
   }
 `;
 
-const smoky = css`
+export const smoky = css`
   overflow: hidden;
   backface-visibility: hidden;
   & > span {
@@ -101,7 +101,7 @@ const slideOutRight = keyframes`
   }
 `;
 
-const slide = {
+export const slide = {
   inleft: css`
     animation: 0.7s ${slideInLeft} ${$.easingFn.decelerate};
   `,
@@ -116,5 +116,120 @@ const slide = {
   `
 };
 
-export default { strike, smoky };
-export { slide };
+// Animations
+export const checkboxOn = keyframes`
+  0% {
+    box-shadow:
+      0 0 0 10px,
+      10px -10px 0 10px,
+      32px 0 0 20px,
+      0 32px 0 20px,
+      -5px 5px 0 10px,
+      15px 2px 0 11px;
+  }
+  50% {
+    box-shadow:
+      0 0 0 10px,
+      10px -10px 0 10px,
+      32px 0 0 20px,
+      0 32px 0 20px,
+      -5px 5px 0 10px,
+      20px 2px 0 11px;
+  }
+  100% {
+    box-shadow:
+      0 0 0 10px,
+      10px -10px 0 10px,
+      32px 0 0 20px,
+      0 32px 0 20px,
+      -5px 5px 0 10px,
+      20px -12px 0 11px;
+  }
+`;
+
+export const checkboxOff = keyframes`
+  0% {
+    box-shadow:
+      0 0 0 10px,
+      10px -10px 0 10px,
+      32px 0 0 20px,
+      0 32px 0 20px,
+      -5px 5px 0 10px,
+      20px -12px 0 11px,
+      0 0 0 0 inset;
+  }
+
+  25% {
+    box-shadow:
+      0 0 0 10px,
+      10px -10px 0 10px,
+      32px 0 0 20px,
+      0 32px 0 20px,
+      -5px 5px 0 10px,
+      20px -12px 0 11px,
+      0 0 0 0 inset;
+  }
+  50% {
+    transform: rotate(45deg);
+    margin-top: -4px;
+    margin-left: 6px;
+    width: 0;
+    height: 0;
+    box-shadow:
+      0 0 0 10px,
+      10px -10px 0 10px,
+      32px 0 0 20px,
+      0 32px 0 20px,
+      -5px 5px 0 10px,
+      15px 2px 0 11px,
+      0 0 0 0 inset;
+  }
+  51% {
+    transform: rotate(0deg);
+    margin-top: -2px;
+    margin-left: -2px;
+    width: 20px;
+    height: 20px;
+    box-shadow:
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 10px inset;
+  }
+  100% {
+    transform: rotate(0deg);
+    margin-top: -2px;
+    margin-left: -2px;
+    width: 20px;
+    height: 20px;
+    box-shadow:
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0,
+      0 0 0 0 inset;
+  }
+  `;
+export const rippleOn = keyframes`
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(13,13);
+  }
+`;
+export const rippleOff = keyframes`
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(13,13);
+  }
+`;

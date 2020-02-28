@@ -46,7 +46,7 @@ const PillInput = () => {
       <Input
         type="text"
         value={keyword}
-        onChange={e => changeKeyword(e.target.value)}
+        onChange={e => changeKeyword({ keyword: e.target.value })}
       />
       <Chevron handler={() => setIsExtended(prev => !prev)} />
     </Wrapper>

@@ -15,7 +15,7 @@ import Chevron from '../Chevron';
 import { SearchButton, PillMain, PillExtension } from './styled';
 import Input from './Input';
 import Radio from './Radio';
-import Checkmark from './Checkmark';
+import Checkbox from './Checkbox';
 import PillInput from './PillInput';
 import { Provider } from './context';
 
@@ -71,11 +71,23 @@ const Searchbar = () => {
             {dataWithKeys.map(({ key, header, component, ...rest }) => {
               switch (component) {
                 case 'radio':
-                  return <Radio {...rest}>{header}</Radio>;
+                  return (
+                    <Radio key={key} {...rest}>
+                      {header}
+                    </Radio>
+                  );
                 case 'input':
-                  return <Input {...rest}>{header}</Input>;
+                  return (
+                    <Input key={key} {...rest}>
+                      {header}
+                    </Input>
+                  );
                 case 'checkmark':
-                  return <Checkmark {...rest}>{header}</Checkmark>;
+                  return (
+                    <Checkbox key={key} {...rest}>
+                      {header}
+                    </Checkbox>
+                  );
                 default:
                   throw new Error('Invalid JSON');
               }
