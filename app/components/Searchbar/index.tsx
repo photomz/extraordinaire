@@ -4,14 +4,15 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ipcRenderer } from 'electron';
+import { Link } from 'react-router-dom';
 
 import $ from '../../styles/global';
 import IPC from '../../constants/ipcActions.json';
 import data from './data.json';
 import { addKeys } from '../../utils';
 import { SearchState } from '../../reducers/types';
+import routes from '../../constants/routes.json';
 
-import Chevron from '../Chevron';
 import { SearchButton, PillMain, PillExtension } from './styled';
 import Input from './Input';
 import Radio from './Radio';
@@ -30,6 +31,12 @@ const Wrapper = styled.section`
   height: 50%;
 `;
 
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+  outline: none;
+`;
+
 const Searchbar = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
   const [isExtended, setIsExtended] = useState<boolean>(false);
@@ -45,27 +52,16 @@ const Searchbar = () => {
       >
         <PillMain connectBorder={isExtended}>
           <PillInput />
-
-          <SearchButton
-            onClick={() => {
-              // eslint-disable-next-line promise/catch-or-return
-              ipcRenderer
-                .invoke(IPC.DB.SEARCH, {
-                  keyword: searchText,
-                  ...searchOptions
-                })
-                .then(res => console.log(res));
-            }}
-            extend={isExtended}
-          >
-            <FontAwesomeIcon
-              icon={
-                // eslint-disable-next-line valid-typeof
-                typeof searchOptions !== undefined && searchOptions.isTextSearch
-                  ? 'search'
-                  : 'search-location'
-              }
-            />
+          <SearchButton extend={isExtended}>
+            <StyledLink to={routes.RESULT}>
+              <FontAwesomeIcon
+                icon={
+                  searchOptions && searchOptions.isTextSearch
+                    ? 'search'
+                    : 'search-location'
+                }
+              />
+            </StyledLink>
           </SearchButton>
           <PillExtension visible={isExtended}>
             {dataWithKeys.map(({ key, header, component, ...rest }) => {
