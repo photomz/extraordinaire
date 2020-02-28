@@ -20,6 +20,7 @@ const Wrapper = styled.section`
 const ResultList = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
   const [rawResults, setRawResults] = useState<string[][] | null>(null);
+  const [results, setResults] = useState<unknown[]>([]);
   useEffect(() => {
     ipcRenderer
       .invoke(IPC.DB.SEARCH, searchOptions)
@@ -27,7 +28,25 @@ const ResultList = () => {
       // eslint-disable-next-line no-console
       .catch(e => console.error(e));
   }, []);
-  return <Wrapper>{rawResults}</Wrapper>;
+  useEffect(() => {
+    if (rawResults === null) return;
+    rawResults.forEach(rawRes => {
+      ipcRenderer
+        .invoke(IPC.DB.QUERY, rawRes.slice(0, rawRes.length - 1))
+        .then(res => {
+          setResults(prev => {
+            const newResults = [...prev];
+            newResults.push(res);
+            return newResults;
+          });
+          return null;
+        })
+        // eslint-disable-next-line no-console
+        .catch(e => console.error(e));
+    });
+  }, [rawResults]);
+  console.log(results);
+  return <Wrapper>{results}</Wrapper>;
 };
 
 export default ResultList;
