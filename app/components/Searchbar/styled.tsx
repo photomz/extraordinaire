@@ -13,6 +13,8 @@ export const SearchButton = styled.button`
   box-sizing: content-box;
   border: 2px solid ${$.color.gray1};
   border-radius: 99px;
+  border-bottom-right-radius: ${({ extend }) => (extend ? 0 : 99)}px;
+  transition: all 0.5s ${$.easingFn.standard};
   text-align: center;
   background-color: ${$.color.white};
   &:active,
@@ -66,11 +68,10 @@ export const PillMain = styled.div`
   box-shadow: ${({ connectBorder }) =>
     connectBorder ? $.dropShadow.normal : $.dropShadow.oppressed};
   border-bottom-left-radius: ${({ connectBorder }) =>
-    connectBorder ? $.border.radius1 : 0}px;
+    connectBorder ? 0 : $.border.radius1}px;
   border-bottom-right-radius: ${({ connectBorder }) =>
-    connectBorder ? $.border.radius1 : 0}px;
-  transition: box-shadow, border-bottom-left-radius,
-    border-bottom-right-radius 0.5s ${$.easingFn.standard};
+    connectBorder ? 0 : $.border.radius1}px;
+  transition: all 0.5s ${$.easingFn.standard};
 `;
 
 export const PillExtension = styled.div`

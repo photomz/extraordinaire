@@ -23,8 +23,8 @@ const Headline = styled.h1`
 `;
 
 const LargeLogo = styled.img`
-  height: 200px;
-  width: 200px;
+  height: 120px;
+  width: 120px;
 `;
 
 interface Props {

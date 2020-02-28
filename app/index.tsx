@@ -3,9 +3,10 @@ import { render } from 'react-dom';
 import { AppContainer as ReactHotAppContainer } from 'react-hot-loader';
 import Root from './containers/Root';
 import { configureStore, history } from './store/configureStore';
-import 'styles/reset.css';
-import 'styles/fonts.css';
-import 'styles/global.css';
+import './styles/reset.css';
+import './styles/fonts.css';
+import './styles/global.css';
+import './styles/init';
 
 const store = configureStore();
 

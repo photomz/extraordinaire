@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { ipcRenderer } from 'electron';
 
 import $ from '../../styles/global';
@@ -54,8 +55,16 @@ const Searchbar = () => {
               .invoke(IPC.DB.SEARCH, { keyword: searchText, ...searchOptions })
               .then(res => console.log(res));
           }}
+          extend={isExtended}
         >
-          Search
+          <FontAwesomeIcon
+            icon={
+              // eslint-disable-next-line valid-typeof
+              typeof searchOptions !== undefined && searchOptions.isTextSearch
+                ? 'search'
+                : 'search-location'
+            }
+          />
         </SearchButton>
         <PillExtension visible={isExtended}>
           <RadioOptions
