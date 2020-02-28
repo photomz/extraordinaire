@@ -17,10 +17,14 @@ const Wrapper = styled.section`
   height: 50%;
 `;
 
+// TODO: Style and make UI, borrow from HackerNews
+// TODO: Object result state, not array
+// TODO: Return uuids from IPC main
+// TODO: Jest testing fro all components
 const ResultList = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
   const [rawResults, setRawResults] = useState<string[][] | null>(null);
-  const [results, setResults] = useState<unknown[]>([]);
+  const [results, setResults] = useState<string[]>([]);
   useEffect(() => {
     ipcRenderer
       .invoke(IPC.DB.SEARCH, searchOptions)
@@ -45,7 +49,6 @@ const ResultList = () => {
         .catch(e => console.error(e));
     });
   }, [rawResults]);
-  console.log(results);
   return <Wrapper>{results}</Wrapper>;
 };
 
