@@ -114,6 +114,44 @@ const promisedSearch = (keyword: string): Promise<string[][]> =>
     }
   });
 
+const objectifyRaw = (raw: string[][]): Record<string, unknown> => {
+  const [
+    paperType,
+    year,
+    season,
+    timezone,
+    questionNumber,
+    questionLetter,
+    ...rest
+  ] = raw;
+  const standardProps = {
+    paperType,
+    year,
+    season,
+    timezone,
+    questionNumber,
+    questionLetter,
+    raw
+  };
+  if (paperType === 'qp') {
+    const [index] = rest;
+    return {
+      ...standardProps,
+      index,
+      path: raw.slice(0, raw.length - 1)
+    };
+  }
+  if (paperType === 'ms') {
+    const index = rest[rest.length - 1];
+    return {
+      ...standardProps,
+      index,
+      path: raw.slice(0, 6) // Standard paperType -> letter path of length 6
+    };
+  }
+  throw new Error(`Paper type unexpected "${paperType}"`);
+};
+
 interface DBSearchArgs {
   keyword: string;
   paperType: string;
@@ -132,7 +170,10 @@ ipcMain.handle(IPC.DB.SEARCH, (e, { keyword, paperType, year }: DBSearchArgs) =>
         year ? resArr[1] == year - 2000 : true
       )
     )
-); // Year
+    .then(resArr =>
+      resArr.map(res => console.error(objectifyRaw(res)) || objectifyRaw(res))
+    )
+);
 
 export default class AppUpdater {
   constructor() {

@@ -23,32 +23,23 @@ const Wrapper = styled.section`
 // TODO: Jest testing fro all components
 const ResultList = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
-  const [rawResults, setRawResults] = useState<string[][] | null>(null);
-  const [results, setResults] = useState<string[]>([]);
+  const [results, setResults] = useState<Record<string, unknown>[]>([]);
   useEffect(() => {
-    ipcRenderer
-      .invoke(IPC.DB.SEARCH, searchOptions)
-      .then(res => setRawResults(res))
-      // eslint-disable-next-line no-console
-      .catch(e => console.error(e));
+    (async () => {
+      const allRes = await ipcRenderer.invoke(IPC.DB.SEARCH, searchOptions);
+      allRes.forEach(async res => {
+        const data = await ipcRenderer.invoke(IPC.DB.QUERY, res.path);
+        setResults(prev => {
+          const newResults = [...prev];
+          // TODO: Fix reducer, only appending first element
+          newResults.push({ ...res, data });
+          return newResults;
+        });
+      });
+    })();
   }, []);
-  useEffect(() => {
-    if (rawResults === null) return;
-    rawResults.forEach(rawRes => {
-      ipcRenderer
-        .invoke(IPC.DB.QUERY, rawRes.slice(0, rawRes.length - 1))
-        .then(res => {
-          setResults(prev => {
-            const newResults = [...prev];
-            newResults.push(res);
-            return newResults;
-          });
-          return null;
-        })
-        // eslint-disable-next-line no-console
-        .catch(e => console.error(e));
-    });
-  }, [rawResults]);
+  console.log(results);
+  // TODO: Fix no object show
   return <Wrapper>{results}</Wrapper>;
 };
 

@@ -42,12 +42,13 @@ export const PillMain = styled.div`
   border-width: 0;
   vertical-align: middle;
   background-color: ${$.color.white};
+  box-shadow: ${({ connectBorder }) =>
+    connectBorder ? $.dropShadow.repressed : $.dropShadow.normal};
   &:focus,
   &:hover {
-    box-shadow: ${$.dropShadow.repressed};
+    box-shadow: ${({ connectBorder }) =>
+      connectBorder ? $.dropShadow.oppressed : $.dropShadow.repressed};
   }
-  box-shadow: ${({ connectBorder }) =>
-    connectBorder ? $.dropShadow.normal : $.dropShadow.oppressed};
   border-bottom-left-radius: ${({ connectBorder }) =>
     connectBorder ? 0 : $.border.radius1}px;
   border-bottom-right-radius: ${({ connectBorder }) =>
