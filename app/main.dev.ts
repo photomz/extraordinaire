@@ -171,7 +171,9 @@ ipcMain.handle(IPC.DB.SEARCH, (e, { keyword, paperType, year }: DBSearchArgs) =>
       )
     )
     .then(resArr =>
-      resArr.map(res => console.error(objectifyRaw(res)) || objectifyRaw(res))
+      resArr.map(res =>
+        /* console.error(objectifyRaw(res)) || */ objectifyRaw(res)
+      )
     )
 );
 

@@ -1,4 +1,5 @@
 {
   "setSearch": "SET_SEARCH_OPTIONS",
-  "changeOption": "CHANGE_SEARCH_OPTION"
+  "changeOption": "CHANGE_SEARCH_OPTION",
+  "fireSearch": "INCREMENT_FIRE_SEARCH_COUNTER"
 }

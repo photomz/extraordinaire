@@ -1,3 +1,4 @@
+import { Action } from 'redux';
 import { SearchState } from './types';
 import actions from '../constants/actions.json';
 
@@ -14,7 +15,8 @@ const initialState: SearchState = {
   isTextSearch: true
 };
 
-export default (state: SearchState = initialState, { payload, type }) => {
+export default (state: SearchState = initialState, action: Action<string>) => {
+  const { type, payload } = action;
   switch (type) {
     case actions.changeOption:
       return {

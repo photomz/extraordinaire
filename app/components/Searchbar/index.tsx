@@ -3,15 +3,13 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ipcRenderer } from 'electron';
 import { Link } from 'react-router-dom';
 
 import $ from '../../styles/global';
-import IPC from '../../constants/ipcActions.json';
 import data from './data.json';
-import { addKeys } from '../../utils';
+import { addKeys, useActions } from '../../utils';
+import { fireSearch } from '../../actions';
 import { SearchState } from '../../reducers/types';
-import routes from '../../constants/routes.json';
 
 import { SearchButton, PillMain, PillExtension } from './styled';
 import Input from './Input';
@@ -40,8 +38,8 @@ const StyledLink = styled(Link)`
 const Searchbar = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
   const [isExtended, setIsExtended] = useState<boolean>(false);
-  // TODO: Invoke ipc in new results page, receive args from redux
-  // TODO: Componentalise PillInput
+  // TODO: Recieve fireaction counter in result list, use to manipulate usedebounce dependency array
+  const fireSearchAction = useActions(fireSearch);
   return (
     <Wrapper>
       <Provider
@@ -52,16 +50,14 @@ const Searchbar = () => {
       >
         <PillMain connectBorder={isExtended}>
           <PillInput />
-          <SearchButton extend={isExtended}>
-            <StyledLink to={routes.RESULT}>
-              <FontAwesomeIcon
-                icon={
-                  searchOptions && searchOptions.isTextSearch
-                    ? 'search'
-                    : 'search-location'
-                }
-              />
-            </StyledLink>
+          <SearchButton extend={isExtended} onClick={fireSearch}>
+            <FontAwesomeIcon
+              icon={
+                searchOptions && searchOptions.isTextSearch
+                  ? 'search'
+                  : 'search-location'
+              }
+            />
           </SearchButton>
           <PillExtension visible={isExtended}>
             {dataWithKeys.map(({ key, header, component, ...rest }) => {

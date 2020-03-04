@@ -1,12 +1,16 @@
 import { Action } from 'redux';
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../actions/counter';
+import actions from '../constants/actions.json';
 
-export default function counter(state = 0, action: Action<string>) {
-  switch (action.type) {
-    case INCREMENT_COUNTER:
+const initialState = 0;
+
+export default function counter(
+  state: number = initialState,
+  action: Action<string>
+) {
+  const { type } = action;
+  switch (type) {
+    case actions.fireSearch:
       return state + 1;
-    case DECREMENT_COUNTER:
-      return state - 1;
     default:
       return state;
   }
