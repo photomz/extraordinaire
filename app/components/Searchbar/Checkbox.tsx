@@ -131,6 +131,7 @@ interface Props {
   selectorName: string;
 }
 
+// TODO: Abstract to checkbox connected component and dumb component
 const Checkbox = ({ selectorName, children }: Props) => {
   const isChecked = useSelector(state => state.search[selectorName]);
   const changeCheckedAction = useActions(changeSearchOption);

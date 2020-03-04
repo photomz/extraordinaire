@@ -82,6 +82,7 @@ interface Props {
   selectorName: string;
 }
 
+// TODO: Abstract to radio connected component and dumb component
 const RadioOptions = ({
   children,
   options,

@@ -103,6 +103,7 @@ interface Props {
   selectorName: string;
 }
 
+// TODO: Abstract to input connected component and dumb component
 const InputOption = ({ children, selectorName }: Props) => {
   const input = useSelector(state => state.search[selectorName]);
   const changeInputAction = useActions(changeSearchOption);
