@@ -12,6 +12,7 @@ import path from 'path';
 import { app, BrowserWindow, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import shortid from 'shortid';
 import IPC from './constants/ipcActions.json';
 import MenuBuilder from './menu';
 import db from '../db/db.json';
@@ -131,7 +132,8 @@ const objectifyRaw = (raw: string[][]): Record<string, unknown> => {
     timezone,
     questionNumber,
     questionLetter,
-    raw
+    raw,
+    key: shortid.generate()
   };
   if (paperType === 'qp') {
     const [index] = rest;

@@ -29,12 +29,6 @@ const Wrapper = styled.section`
   height: 50%;
 `;
 
-const StyledLink = styled(Link)`
-  color: inherit;
-  text-decoration: none;
-  outline: none;
-`;
-
 const Searchbar = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
   const [isExtended, setIsExtended] = useState<boolean>(false);
@@ -50,7 +44,7 @@ const Searchbar = () => {
       >
         <PillMain connectBorder={isExtended}>
           <PillInput />
-          <SearchButton extend={isExtended} onClick={fireSearch}>
+          <SearchButton extend={isExtended} onClick={fireSearchAction}>
             <FontAwesomeIcon
               icon={
                 searchOptions && searchOptions.isTextSearch

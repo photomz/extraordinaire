@@ -20,16 +20,23 @@ const Wrapper = styled.section`
 
 // TODO: Style and make UI, borrow from HackerNews
 // TODO: Object result state, not array
-// TODO: Return uuids from IPC main
-// TODO: Jest testing fro all components
+// NOTE: Return uuids from IPC main DONE
+// TODO: Jest testing for all components
 const ResultList = () => {
   const searchOptions: SearchState = useSelector(state => state.search);
+  const fireSearchCounter = useSelector(state => state.counter);
   const [results, setResults] = useState<Record<string, unknown>[]>([]);
-  const debouncedOptions = useDebounce(searchOptions, 1000);
+  const debouncedCounter = useDebounce(fireSearchCounter, 1000);
   useEffect(() => {
     (async () => {
-      console.log('HEYYYY');
+      // console.log(searchOptions);
       const allRes = await ipcRenderer.invoke(IPC.DB.SEARCH, searchOptions);
+      if (!allRes.length) setResults([]);
+      if (allRes.length > 200) {
+        console.warn('Query overwhelm');
+        setResults([]);
+        return;
+      }
       for (let i = 0; i < allRes.length; i += 1) {
         // eslint-disable-next-line no-await-in-loop
         const data = await ipcRenderer.invoke(IPC.DB.QUERY, allRes[i].path);
@@ -41,10 +48,8 @@ const ResultList = () => {
         });
       }
     })();
-  }, [debouncedOptions]);
-  console.log(searchOptions);
-  // console.log(results);
-  // TODO: Fix no object show
+  }, [debouncedCounter, searchOptions]);
+  console.log(results);
   return <Wrapper>Oof</Wrapper>;
 };
 

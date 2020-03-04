@@ -6,7 +6,7 @@ import { Dispatch } from '../reducers/types';
 import actions from '../constants/actions.json';
 
 export const incrementSearchCounter = (): Action<string> => ({
-  types: actions.fireSearch
+  type: actions.fireSearch
 });
 
 export const fireSearch = () => (dispatch: Dispatch, getState: GetState) => {
